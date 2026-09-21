@@ -1,0 +1,25 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { fadeUp, viewport } from "@/lib/motion";
+import { site } from "@/lib/portfolio";
+
+export function Footer() {
+  const year = new Date().getFullYear();
+
+  return (
+    <motion.footer
+      initial="hidden"
+      whileInView="visible"
+      viewport={viewport}
+      variants={fadeUp}
+      className="py-10 px-6 border-t border-border/40"
+    >
+      <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-center gap-4 text-sm text-muted-foreground">
+        <p className="font-mono">
+          <span className="text-accent">©</span> {year} {site.name}
+        </p>
+      </div>
+    </motion.footer>
+  );
+}

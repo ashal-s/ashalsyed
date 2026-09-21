@@ -1,0 +1,251 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --primary: 222 47% 11%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 214 32% 93%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 214 32% 93%;
+    --muted-foreground: 215 16% 42%;
+    --accent: 187 85% 38%;
+    --accent-foreground: 210 40% 98%;
+    --border: 214 32% 88%;
+    --input: 214 32% 88%;
+    --ring: 187 85% 38%;
+    --radius: 0.625rem;
+    --grid-line: 214 32% 90%;
+    --glow-secondary: 262 55% 52%;
+    --contrib-0: 214 25% 88%;
+    --contrib-1: 187 55% 72%;
+    --contrib-2: 187 70% 48%;
+    --contrib-3: 187 80% 36%;
+    --contrib-4: 187 85% 28%;
+  }
+
+  .dark {
+    --background: 222 47% 6%;
+    --foreground: 210 40% 96%;
+    --card: 222 40% 9%;
+    --card-foreground: 210 40% 96%;
+    --primary: 210 40% 96%;
+    --primary-foreground: 222 47% 6%;
+    --secondary: 217 33% 14%;
+    --secondary-foreground: 210 40% 96%;
+    --muted: 217 33% 14%;
+    --muted-foreground: 215 20% 58%;
+    --accent: 187 85% 48%;
+    --accent-foreground: 222 47% 6%;
+    --border: 217 33% 18%;
+    --input: 217 33% 18%;
+    --ring: 187 85% 48%;
+    --grid-line: 217 33% 14%;
+    --glow-secondary: 262 70% 58%;
+    --contrib-0: 217 28% 16%;
+    --contrib-1: 187 45% 22%;
+    --contrib-2: 187 60% 32%;
+    --contrib-3: 187 75% 42%;
+    --contrib-4: 187 85% 52%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    transition: background-color 0.35s ease, color 0.35s ease;
+  }
+
+  ::selection {
+    @apply bg-accent/30 text-foreground;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+.grid-drift {
+  animation: grid-drift 28s linear infinite;
+}
+
+.glow-float {
+  animation: glow-float 14s ease-in-out infinite;
+}
+
+.glow-float-delayed {
+  animation: glow-float 18s ease-in-out infinite;
+  animation-delay: -6s;
+}
+
+@keyframes grid-drift {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(64px, 64px);
+  }
+}
+
+@keyframes glow-float {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.35;
+  }
+  33% {
+    transform: translate(24px, -18px) scale(1.06);
+    opacity: 0.5;
+  }
+  66% {
+    transform: translate(-16px, 12px) scale(0.96);
+    opacity: 0.4;
+  }
+}
+
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.typing-animation {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid transparent;
+  animation: typing 2s steps(40, end), blink-caret 0.75s step-end infinite;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+.delay-1 {
+  animation-delay: 0.5s;
+}
+.delay-2 {
+  animation-delay: 1s;
+}
+.delay-3 {
+  animation-delay: 1.5s;
+}
+.delay-4 {
+  animation-delay: 2s;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+    opacity: 1;
+  }
+  to {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #4ade80;
+  }
+}
+
+.bad-apple-scanlines {
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255, 255, 255, 0.03) 2px,
+    rgba(255, 255, 255, 0.03) 4px
+  );
+}
+
+/* Prose styles for case studies and long-form pages */
+.content-prose {
+  @apply text-foreground leading-relaxed;
+  font-size: 1.0625rem;
+}
+
+.content-prose > * + * {
+  @apply mt-5;
+}
+
+.content-prose h2 {
+  @apply text-2xl font-bold tracking-tight mt-12 mb-4 scroll-mt-24;
+}
+
+.content-prose h3 {
+  @apply text-xl font-semibold tracking-tight mt-8 mb-3 scroll-mt-24;
+}
+
+.content-prose p {
+  @apply text-muted-foreground leading-[1.75];
+}
+
+.content-prose ul,
+.content-prose ol {
+  @apply pl-6 space-y-2 text-muted-foreground;
+}
+
+.content-prose ul {
+  @apply list-disc;
+}
+
+.content-prose ol {
+  @apply list-decimal;
+}
+
+.content-prose li {
+  @apply leading-relaxed;
+}
+
+.content-prose li::marker {
+  @apply text-accent;
+}
+
+.content-prose li > ul,
+.content-prose li > ol {
+  @apply mt-2 mb-0;
+}
+
+.content-prose strong {
+  @apply text-foreground font-semibold;
+}
+
+.content-prose a {
+  @apply text-accent underline underline-offset-4 decoration-accent/40 hover:decoration-accent transition-colors;
+}
